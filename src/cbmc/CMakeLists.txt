@@ -67,7 +67,7 @@ if(NOT WIN32)
   )
   install(
     FILES ${CBMC_ROOT_DIR}/scripts/bash-autocomplete/cbmc.sh
-    DESTINATION etc/bash_completion.d
+    DESTINATION share/bash-completion/completions
     RENAME cbmc
   )
 endif()
