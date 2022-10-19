@@ -52,12 +52,6 @@ add_custom_command(
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
-if(NOT "${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
-    add_custom_target(c_library_check
-        DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/library-check.stamp
-)
-endif()
-
 ################################################################################
 
 make_inc(compiler_headers/arm_builtin_headers)
@@ -113,7 +107,6 @@ set(extra_dependencies
     ${CMAKE_CURRENT_BINARY_DIR}/compiler_headers/windows_builtin_headers.inc
     ${CMAKE_CURRENT_BINARY_DIR}/cprover_library.inc
     ${CMAKE_CURRENT_BINARY_DIR}/cprover_builtin_headers.inc
-    ${CMAKE_CURRENT_BINARY_DIR}/library-check.stamp
 )
 
 if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
