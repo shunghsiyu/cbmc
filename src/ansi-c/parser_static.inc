@@ -4,8 +4,7 @@
 
 #include "merged_type.h"
 
-#define YYSTYPE unsigned
-#define YYSTYPE_IS_TRIVIAL 1
+#define YYANSI_CSTYPE unsigned
 
 #define mto(x, y) parser_stack(x).add_to_operands(std::move(parser_stack(y)))
 #define mts(x, y) (to_type_with_subtypes(stack_type(x)).move_to_subtypes(stack_type(y)))
@@ -25,7 +24,7 @@ Function: init
 
 \*******************************************************************/
 
-static void init(YYSTYPE &expr)
+static void init(YYANSI_CSTYPE &expr)
 {
   newstack(expr);
 }
@@ -42,7 +41,7 @@ Function: init
 
 \*******************************************************************/
 
-inline static void init(YYSTYPE &expr, const irep_idt &id)
+inline static void init(YYANSI_CSTYPE &expr, const irep_idt &id)
 {
   newstack(expr);
   parser_stack(expr).id(id);
@@ -60,7 +59,7 @@ Function: set
 
 \*******************************************************************/
 
-inline static void set(YYSTYPE expr, const irep_idt &id)
+inline static void set(YYANSI_CSTYPE expr, const irep_idt &id)
 {
   parser_stack(expr).id(id);
 }
@@ -77,7 +76,7 @@ Function: statement
 
 \*******************************************************************/
 
-static void statement(YYSTYPE &expr, const irep_idt &id)
+static void statement(YYANSI_CSTYPE &expr, const irep_idt &id)
 {
   set(expr, ID_code);
   parser_stack(expr).set(ID_statement, id);
@@ -136,7 +135,7 @@ Function: merge_types
 \*******************************************************************/
 
 #if 0
-static void merge_types(const YYSTYPE dest, const YYSTYPE src)
+static void merge_types(const YYANSI_CSTYPE dest, const YYANSI_CSTYPE src)
 {
   merge_types(parser_stack(dest), parser_stack(src));
 }
@@ -154,7 +153,7 @@ Function: merge
 
 \*******************************************************************/
 
-static YYSTYPE merge(const YYSTYPE src1, const YYSTYPE src2)
+static YYANSI_CSTYPE merge(const YYANSI_CSTYPE src1, const YYANSI_CSTYPE src2)
 {
   merge_types(parser_stack(src1), parser_stack(src2));
   return src1;
@@ -270,7 +269,7 @@ Function: make_subtype
 
 \*******************************************************************/
 
-static void make_subtype(YYSTYPE dest, YYSTYPE src)
+static void make_subtype(YYANSI_CSTYPE dest, YYANSI_CSTYPE src)
 {
   make_subtype(stack_type(dest), stack_type(src));
 }
@@ -287,7 +286,7 @@ Function: make_pointer
 
 \*******************************************************************/
 
-static void make_pointer(const YYSTYPE dest)
+static void make_pointer(const YYANSI_CSTYPE dest)
 {
   // The below deliberately avoids pointer_type().
   // The width is set during conversion.
@@ -307,7 +306,7 @@ Function: do_pointer
 
 \*******************************************************************/
 
-static void do_pointer(const YYSTYPE ptr, const YYSTYPE dest)
+static void do_pointer(const YYANSI_CSTYPE ptr, const YYANSI_CSTYPE dest)
 {
   make_pointer(ptr);
   make_subtype(dest, ptr);
@@ -325,7 +324,7 @@ Function: create_function_scope
 
 \*******************************************************************/
 
-static void create_function_scope(const YYSTYPE d)
+static void create_function_scope(const YYANSI_CSTYPE d)
 {
   ansi_c_declarationt &declaration=to_ansi_c_declaration(parser_stack(d));
   ansi_c_declaratort &declarator=declaration.declarator();

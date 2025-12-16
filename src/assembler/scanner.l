@@ -17,7 +17,6 @@
 #endif
 
 #define PARSER (*yyextra)
-#define YYSTYPE unsigned
 #undef  ECHO
 #define ECHO
 

@@ -1,3 +1,5 @@
+%define api.value.type {unsigned}
+
 %{
 
 // This parser is based on the IEC standard 61131-3 which, among other things,
@@ -34,9 +36,6 @@ int yystatement_listerror(
   statement_list_parser.parse_error(error, yystatement_listget_text(scanner));
   return 0;
 }
-
-#define YYSTYPE unsigned
-#define YYSTYPE_IS_TRIVIAL 1
 
 #include "statement_list_y.tab.h"
 

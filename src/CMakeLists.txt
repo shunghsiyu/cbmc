@@ -1,4 +1,4 @@
-find_package(BISON REQUIRED)
+find_package(BISON 3.0.0 REQUIRED)
 find_package(FLEX REQUIRED)
 
 find_package(Doxygen)
@@ -34,7 +34,7 @@ macro(generic_bison name)
         parser
         "${CMAKE_CURRENT_SOURCE_DIR}/parser.y"
         "${CMAKE_CURRENT_BINARY_DIR}/${bison_source}"
-        COMPILE_FLAGS "${bison_warnings_as_errors} -pyy${name}"
+        COMPILE_FLAGS "${bison_warnings_as_errors} -Dapi.prefix={yy${name}}"
     )
     set(renamed_parser_header "${CMAKE_CURRENT_BINARY_DIR}/${bison_header}")
     add_custom_command(OUTPUT "${renamed_parser_header}"

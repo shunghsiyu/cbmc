@@ -43,10 +43,6 @@ static int isatty(int) { return 0; }
 // Value inside of statement_list_parser.h.
 #define PARSER (*yyextra)
 
-// Sets the type of yystatement_listlval so that it can be used as the stack 
-// index.
-#define YYSTYPE unsigned
-
 // For access to the stack and the parser itself.
 #include "statement_list_parser.h"
 
